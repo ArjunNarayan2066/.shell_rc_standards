@@ -41,6 +41,7 @@ alias gbir='ts 2;echo git bisect reset;git bisect reset'
 alias gsu='ts 2;echo git submodule update;git submodule update'
 alias gsui='ts 2;echo git submodule update --init;git submodule update --init'
 alias gsuir='ts 2;echo git submodule update --init --recursive;git submodule update --init --recursive'
+alias gsy='ts 2;echo git submodule sync --recursive;git submodule sync --recursive'
 #
 alias gcp='ts 2;echo git cherry-pick;git cherry-pick'
 alias gcm='ts 3;echo git commit -m;git commit -m'
