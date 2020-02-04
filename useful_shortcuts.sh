@@ -18,6 +18,7 @@ alias bas='ts 2;echo "bazel sync [sync all repos specified in WORKSPACE to work 
 alias ga='ts 1;echo git add;git add '
 alias ga='ts 1;echo git add --all;git add --all'
 alias gb='ts 2;echo git branch;git branch'
+alias gbf='ts 10;echo "git pull origin && git submodule sync && git submodule update --init --recursive"; gplo && gsy && gsuir'
 alias gd='ts 1;echo git diff;git diff'
 alias gc='ts 2;echo git checkout;git checkout'
 alias gdh='ts 3;echo git diff HEAD;git diff HEAD~'
