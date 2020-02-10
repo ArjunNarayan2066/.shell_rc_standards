@@ -16,9 +16,9 @@ alias baf='ts 2;echo "bazel fetch [target] [fetch a target]";bazel fetch $1'
 alias bas='ts 2;echo "bazel sync [sync all repos specified in WORKSPACE to work offline]";bazel sync'
 # Git Aliases
 alias ga='ts 1;echo git add;git add '
-alias ga='ts 1;echo git add --all;git add --all'
+alias gaa='ts 1;echo git add --all;git add --all'
 alias gb='ts 2;echo git branch;git branch'
-alias gbf='ts 10;echo "git pull origin && git submodule sync && git submodule update --init --recursive"; gplo && gsy && gsuir'
+alias gbf='ts 10;echo "Get Full Branch: gplo; gsy; gsuir"; gplo; gsy; gsuir'
 alias gd='ts 1;echo git diff;git diff'
 alias gc='ts 2;echo git checkout;git checkout'
 alias gdh='ts 3;echo git diff HEAD;git diff HEAD~'
@@ -75,14 +75,21 @@ alias racl='ts 1;echo rake clean;rake clean'
 alias ra='ts 2;echo ranger;ranger'
 
 # Company Specific Stuff 
-# # Performs 'git checkout -b user/username/G#<param>
-# gcobG() {
-#     ts 5;git checkout -b user/$GIT_USER/G#$1
-# }
-# # Performs 'git checkout user/preet/G#<param>
-# gcoG() {
-#     ts 4;git checkout user/$GIT_USER/G#$1
-# }
+# # Performs 'git checkout -b user/username/SW-<param>
+ gcobG() {
+     ts 5;git checkout -b user/$GIT_USER/SW-$1
+ }
+# # Performs 'git checkout user/arnarayan/SW-<param>
+ gcoG() {
+     ts 4;git checkout user/$GIT_USER/SW-$1
+ }
+gcod() {
+     ts 4; git checkout develop/2020.$1
+}
+
+gcof() {
+     ts 5; git checkout feature/$1
+}
 
 # Performs 'git bisect start; git bisect bad; git bisect good <param>
 gbi() {
