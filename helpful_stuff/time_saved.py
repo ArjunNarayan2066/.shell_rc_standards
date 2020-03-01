@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-target = Path(__file__).parent.joinpath("../time_saved_using_alias_commands.txt").resolve()
+target = Path(__file__).parent.joinpath("../../time_saved_using_alias_commands.txt").resolve()
 
 total_time = 0
 
