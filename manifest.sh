@@ -1,8 +1,17 @@
 #!/bin/bash
 
-source ~/.shell_rc_standards/useful_shortcuts.sh
-
 export EDITOR='vim'
-alias update="sudo apt-get update && sudo apt-get upgrade"
-alias get_time_saved="python3 ~/.shell_rc_standards/time_saved.py"
-alias edit_shortcuts="vim ~/.shell_rc_standards/useful_shortcuts.sh"
+export SHELL_RC=~/.shell_rc_standards
+export SHELL_RC_STUFF=~/.shell_rc_standards/helpful_stuff
+
+source $SHELL_RC_STUFF/useful_shortcuts.sh
+
+alias get_time_saved="python3 $SHELL_RC_STUFF/time_saved.py"
+alias edit_shortcuts="vim $SHELL_RC_STUFF/useful_shortcuts.sh"
+alias copyfiles="python3 $SHELL_RC_STUFF/copy_files.py"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	alias update="brew update && brew upgrade"
+else
+	alias update="sudo apt-get update && sudo apt-get upgrade"
+fi

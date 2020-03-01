@@ -1,6 +1,7 @@
 # Time Saved File
 # This file accumulates time saved using the alias commands
 TSF=~/'time_saved_using_alias_commands.txt'
+GIT_USER="arnarayan"
 # Aliases
 # Bazel
 # All commands enter repo root to execute Bazel and then 'cd -' back to the original directory
@@ -76,13 +77,15 @@ alias ra='ts 2;echo ranger;ranger'
 
 # Company Specific Stuff 
 # # Performs 'git checkout -b user/username/SW-<param>
- gcobG() {
-     ts 5;git checkout -b user/$GIT_USER/SW-$1
- }
+gcobG() {
+    ts 5;git checkout -b user/$GIT_USER/SW-$1
+}
 # # Performs 'git checkout user/arnarayan/SW-<param>
- gcoG() {
-     ts 4;git checkout user/$GIT_USER/SW-$1
- }
+gcoG() {
+    ts 4;git checkout user/$GIT_USER/SW-$1
+}
+
+# Tesla Specific
 gcod() {
      ts 4; git checkout develop/2020.$1
 }
