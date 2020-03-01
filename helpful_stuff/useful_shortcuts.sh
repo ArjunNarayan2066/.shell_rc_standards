@@ -94,6 +94,10 @@ gcof() {
      ts 5; git checkout feature/$1
 }
 
+grsw() {
+     ts 8; git rebase user/$GIT_USER/SW-$1
+}
+
 # Performs 'git bisect start; git bisect bad; git bisect good <param>
 gbi() {
     ts 6;git bisect start;git bisect bad; git bisect good $1
