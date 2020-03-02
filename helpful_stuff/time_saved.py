@@ -1,8 +1,8 @@
 #!/usr/local/bin/python3
 
-from pathlib import Path
+import os
 
-target = Path(__file__).parent.joinpath("../../time_saved_using_alias_commands.txt").resolve()
+target = os.path.expanduser("~/time_saved_using_alias_commands.txt")
 
 total_time = 0
 
