@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 
 export EDITOR='vim'
 export SHELL_RC=~/.shell_rc_standards
 export SHELL_RC_STUFF=~/.shell_rc_standards/helpful_stuff
+export SHELL_RC_WORK=~/work_specific
 
 source $SHELL_RC_STUFF/useful_shortcuts.sh
 
@@ -14,4 +15,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias update="brew update && brew upgrade"
 else
 	alias update="sudo apt-get update && sudo apt-get upgrade"
+fi
+
+if [ -f "$SHELL_RC_WORK/manifest_specific.zsh" ]; then
+	source $SHELL_RC_WORK/manifest_specific.zsh
 fi

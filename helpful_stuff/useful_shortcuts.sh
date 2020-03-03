@@ -76,26 +76,13 @@ alias racl='ts 1;echo rake clean;rake clean'
 alias ra='ts 2;echo ranger;ranger'
 
 # Company Specific Stuff 
-# # Performs 'git checkout -b user/username/SW-<param>
+# # Performs 'git checkout -b user/username/ISSUE_FORM-<param>
 gcobG() {
-    ts 5;git checkout -b user/$GIT_USER/SW-$1
+    ts 5;git checkout -b user/$GIT_USER/ISSUE_FORM-$1
 }
-# # Performs 'git checkout user/arnarayan/SW-<param>
+# # Performs 'git checkout user/arnarayan/ISSUE_FORM-<param>
 gcoG() {
-    ts 4;git checkout user/$GIT_USER/SW-$1
-}
-
-# Tesla Specific
-gcod() {
-     ts 4; git checkout develop/2020.$1
-}
-
-gcof() {
-     ts 5; git checkout feature/$1
-}
-
-grsw() {
-     ts 8; git rebase user/$GIT_USER/SW-$1
+    ts 4;git checkout user/$GIT_USER/ISSUE_FORM-$1
 }
 
 # Performs 'git bisect start; git bisect bad; git bisect good <param>
