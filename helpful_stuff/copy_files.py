@@ -6,29 +6,39 @@ import argparse
 import subprocess
 import os
 
+
 def create_copy_yaml(args):
     with open(args.filepath, "w+") as f:
         f.write("---\n")
-        f.write("ip: \"127.0.0.1\"\n")
-        f.write("user: no_user\n")
         f.write("files:\n\n")
+        f.write("dst:")
+        f.write("\tip: \"127.0.0.1\"\n")
+        f.write("\tuser: no_user\n")
     return
+
 
 def edit_copy_yaml(args):
     subprocess.run("$EDITOR {}".format(args.filepath), shell=True)
     return
 
+
 def copy_files(data):
-    if 'ip' not in data or 'user' not in data:
+    if ('dst' not in data) or ('ip' not in data['dst'] or 'user' not in data['dst']):
         print("IP and/or Data are missing")
         return
 
-    target = "{}@{}".format(data['user'], data['ip'])
+    dst = data['dst']
+    target = "{}@{}".format(dst['user'], dst['ip'])
     files = data['files']
     for k, v in files.items():
         v = os.path.expanduser(v)
         print("{} -> {}".format(k, v))
-        sysrsync.run(source=k, destination=v, source_ssh=target)
+        try:
+            sysrsync.run(source=k, destination=v,
+                         source_ssh=target, options=['--quiet'])
+        except Exception as e:
+            pass
+
 
 def import_data(args):
     if not os.path.exists(args.filepath):
@@ -42,6 +52,7 @@ def import_data(args):
 
         except yaml.YAMLError as exc:
             print(exc)
+
 
 def main():
     parser = argparse.ArgumentParser(description='Copy Files')
@@ -67,6 +78,7 @@ def main():
         edit_copy_yaml(args)
     else:
         import_data(args)
+
 
 if __name__ == "__main__":
     main()
