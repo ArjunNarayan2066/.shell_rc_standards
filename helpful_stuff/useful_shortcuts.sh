@@ -38,6 +38,7 @@ alias gstc='ts 2;echo git stash clear;git stash clear'
 alias gbig='ts 2;echo git bisect good;git bisect good'
 alias gbib='ts 2;echo git bisect bad;git bisect bad'
 alias gbir='ts 2;echo git bisect reset;git bisect reset'
+alias gsh='ts 2;echo git show;git show'
 #
 # Submodules
 alias gsu='ts 2;echo git submodule update;git submodule update'
