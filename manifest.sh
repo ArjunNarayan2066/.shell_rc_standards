@@ -10,6 +10,7 @@ source $SHELL_RC_STUFF/useful_shortcuts.sh
 alias get_time_saved="python3 $SHELL_RC_STUFF/time_saved.py"
 alias edit_shortcuts="vim $SHELL_RC_STUFF/useful_shortcuts.sh"
 alias copyfiles="python3 $SHELL_RC_STUFF/copy_files.py"
+# alias gcoG="python3 $SHELL_RC_STUFF/gco_tools.py"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias update="brew update && brew upgrade"
