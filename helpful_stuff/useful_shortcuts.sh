@@ -1,7 +1,6 @@
 # Time Saved File
 # This file accumulates time saved using the alias commands
 TSF=~/'time_saved_using_alias_commands.txt'
-GIT_USER="arnarayan"
 # Aliases
 # Bazel
 # All commands enter repo root to execute Bazel and then 'cd -' back to the original directory
@@ -79,11 +78,11 @@ alias ra='ts 2;echo ranger;ranger'
 # Company Specific Stuff 
 # # Performs 'git checkout -b user/username/ISSUE_FORM-<param>
 gcobG() {
-    ts 5;git checkout -b user/$GIT_USER/ISSUE_FORM-$1
+    ts 5;git checkout -b user/$GIT_USER/$ISSUE_FORM-$1
 }
 # # Performs 'git checkout user/arnarayan/ISSUE_FORM-<param>
 gcoG() {
-    ts 4;git checkout user/$GIT_USER/ISSUE_FORM-$1
+    ts 4;git checkout user/$GIT_USER/$ISSUE_FORM-$1
 }
 
 # Performs 'git bisect start; git bisect bad; git bisect good <param>
