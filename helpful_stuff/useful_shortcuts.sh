@@ -85,6 +85,44 @@ gcoG() {
     ts 4;git checkout user/$GIT_USER/$ISSUE_FORM-$1
 }
 
+checkBranches() {
+    returnVal=1 # No matches
+    flag=""
+    prefix="LOCAL"
+    if [ "$2" -eq "1" ]; then
+        flag="-r"
+        prefix="REMOTE"
+    fi
+
+    numMatches=$(git branch $flag | grep -c $1)
+    if [ "$numMatches" -eq "0" ]; then
+        echo "$prefix: No matching branch"
+    elif [ "$numMatches" -eq "1" ]; then
+        branch=$(git branch $flag | grep $1)
+        branch="$(echo -e "${branch}" | tr -d '[:space:]')" #remove whitespace
+        if [[ "$branch" == origin/* ]] && [ "$2" -eq "1" ]; then
+             branch=${branch:7}
+        fi
+        echo "Checking out $branch"
+        git checkout $branch
+        returnVal=0 # Success
+    else
+        echo "$prefix: Multiple Matches"
+        git branch $flag | grep $1
+        returnVal=2
+    fi
+
+    return $returnVal
+}
+
+gcoi() {
+    checkBranches $1 0
+    if [ "$returnVal" -ne "0" ]; then
+        echo "No match with local branches. Checking remotes"
+        checkBranches $1 1
+    fi
+}
+
 # Performs 'git bisect start; git bisect bad; git bisect good <param>
 gbi() {
     ts 6;git bisect start;git bisect bad; git bisect good $1
