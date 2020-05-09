@@ -75,6 +75,9 @@ alias rac='ts 1;echo rake coverage;rake coverage'
 alias racl='ts 1;echo rake clean;rake clean'
 alias ra='ts 2;echo ranger;ranger'
 
+# General Use Shortcuts
+alias space_used='ts 3;du -Pshx ./* 2>/dev/null'
+
 # Company Specific Stuff 
 # # Performs 'git checkout -b user/username/ISSUE_FORM-<param>
 gcobG() {
@@ -83,6 +86,9 @@ gcobG() {
 # # Performs 'git checkout user/arnarayan/ISSUE_FORM-<param>
 gcoG() {
     ts 4;git checkout user/$GIT_USER/$ISSUE_FORM-$1
+}
+gstas() {
+   ts 8;git stash apply stash@{$1}
 }
 
 checkBranches() {
