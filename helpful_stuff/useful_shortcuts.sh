@@ -103,12 +103,12 @@ checkBranches() { # 0 = local, 1 = remote check
     elif [ "$numMatches" -eq "1" ]; then
 	returnVal=0 # Success
         branch=$(git branch $flag | grep $1)
-	if [[ ${branch:0:1} == "*" ]]; then; 
+	if [[ ${branch:0:1} == "*" ]]; then;  # Currently on branch
 	    echo "Currently On [${branch:2}]"
             echo "If looking for other branches, try gcoir to check all remote branches"
         else
-            branch="$(echo -e "${branch}" | tr -d '[:space:]')" #remove whitespace
-	    if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi
+            branch="$(echo -e "${branch}" | tr -d '[:space:]')" # remove whitespace
+	    if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi # remove origin/
             echo "Checking out $branch"
             git checkout $branch
 	fi
@@ -120,11 +120,11 @@ checkBranches() { # 0 = local, 1 = remote check
 }
 
 gcoil() {
-    checkBranches $1 0
+    ts 5; checkBranches $1 0
 }
 
 gcoir() {
-    checkBranches $1 1
+    ts 5; checkBranches $1 1
 }
 
 gcoi() {
