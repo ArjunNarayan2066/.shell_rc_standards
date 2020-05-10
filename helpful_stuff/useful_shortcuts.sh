@@ -104,7 +104,8 @@ checkBranches() { # 0 = local, 1 = remote check
 	returnVal=0 # Success
         branch=$(git branch $flag | grep $1)
 	if [[ ${branch:0:1} == "*" ]]; then; 
-	    echo "Currently On Branch"
+	    echo "Currently On [${branch:2}]"
+            echo "If looking for other branches, try gcoir to check all remote branches"
         else
             branch="$(echo -e "${branch}" | tr -d '[:space:]')" #remove whitespace
 	    if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi
@@ -118,11 +119,19 @@ checkBranches() { # 0 = local, 1 = remote check
     fi
 }
 
-gcoi() {
+gcoil() {
     checkBranches $1 0
+}
+
+gcoir() {
+    checkBranches $1 1
+}
+
+gcoi() {
+    gcoil $1
     if [ "$returnVal" -ne "0" ]; then
         echo "No direct match with local branches. Checking remotes"
-        checkBranches $1 1
+        gcoir $1
 	if [ "$returnVal" -ne "0" ]; then
 	    echo "No matches found anywhere. Run a git fetch to find all new branches"
 	fi
