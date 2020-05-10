@@ -91,41 +91,41 @@ gstas() {
    ts 8;git stash apply stash@{$1}
 }
 
-checkBranches() {
+checkBranches() { # 0 = local, 1 = remote check
     returnVal=1 # No matches
     flag=""
     prefix="LOCAL"
-    if [ "$2" -eq "1" ]; then
-        flag="-r"
-        prefix="REMOTE"
-    fi
+    if [ "$2" -eq "1" ]; then; flag="-r"; prefix="REMOTE"; fi
 
     numMatches=$(git branch $flag | grep -c $1)
     if [ "$numMatches" -eq "0" ]; then
         echo "$prefix: No matching branch"
     elif [ "$numMatches" -eq "1" ]; then
+	returnVal=0 # Success
         branch=$(git branch $flag | grep $1)
-        branch="$(echo -e "${branch}" | tr -d '[:space:]')" #remove whitespace
-        if [[ "$branch" == origin/* ]] && [ "$2" -eq "1" ]; then
-             branch=${branch:7}
-        fi
-        echo "Checking out $branch"
-        git checkout $branch
-        returnVal=0 # Success
+	if [[ ${branch:0:1} == "*" ]]; then; 
+	    echo "Currently On Branch"
+        else
+            branch="$(echo -e "${branch}" | tr -d '[:space:]')" #remove whitespace
+	    if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi
+            echo "Checking out $branch"
+            git checkout $branch
+	fi
     else
         echo "$prefix: Multiple Matches"
         git branch $flag | grep $1
         returnVal=2
     fi
-
-    return $returnVal
 }
 
 gcoi() {
     checkBranches $1 0
     if [ "$returnVal" -ne "0" ]; then
-        echo "No match with local branches. Checking remotes"
+        echo "No direct match with local branches. Checking remotes"
         checkBranches $1 1
+	if [ "$returnVal" -ne "0" ]; then
+	    echo "No matches found anywhere. Run a git fetch to find all new branches"
+	fi
     fi
 }
 
