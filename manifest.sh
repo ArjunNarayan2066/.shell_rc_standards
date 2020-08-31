@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 export EDITOR='vim'
-export SHELL_RC=~/.shell_rc_standards
-export SHELL_RC_STUFF=~/.shell_rc_standards/helpful_stuff
+export SHELL_RC=~/.shell_tools
+export SHELL_RC_STUFF=~/.shell_tools/helpful_stuff
 export SHELL_RC_WORK=~/work_specific
 
 source $SHELL_RC_STUFF/useful_shortcuts.sh

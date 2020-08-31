@@ -2,9 +2,13 @@
 
 echo "In zsh setup"
 
-echo "source ~/.shell_rc_standards/manifest.sh" >> ~/.zshrc
+echo "source ~/.shell_tools/manifest.sh" >> ~/.zshrc
 
-~/.shell_rc_standards/create_work_specific.zsh
+~/.shell_tools/create_work_specific.zsh
+
+echo "In Terminator Setup"
+
+sudo apt install terminator
 
 echo "DONE"
 
