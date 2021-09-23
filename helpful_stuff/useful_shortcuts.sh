@@ -101,17 +101,19 @@ checkBranches() { # 0 = local, 1 = remote check
     if [ "$numMatches" -eq "0" ]; then
         echo "$prefix: No matching branch"
     elif [ "$numMatches" -eq "1" ]; then
-	returnVal=0 # Success
+        returnVal=0 # Success
         branch=$(git branch $flag | grep $1)
-	if [[ ${branch:0:1} == "*" ]]; then;  # Currently on branch
-	    echo "Currently On [${branch:2}]"
+        if [[ ${branch:0:1} == "*" ]]; then;  # Currently on branch
+            echo "Currently On [${branch:2}]"
             echo "If looking for other branches, try gcoir to check all remote branches"
         else
             branch="$(echo -e "${branch}" | tr -d '[:space:]')" # remove whitespace
-	    if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi # remove origin/
+
+            if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi # remove origin/
+
             echo "Checking out $branch"
             git checkout $branch
-	fi
+        fi
     else
         echo "$prefix: Multiple Matches"
         git branch $flag | grep $1
@@ -132,9 +134,9 @@ gcoi() {
     if [ "$returnVal" -ne "0" ]; then
         echo "No direct match with local branches. Checking remotes"
         gcoir $1
-	if [ "$returnVal" -ne "0" ]; then
-	    echo "No matches found anywhere. Run a git fetch to find all new branches"
-	fi
+        if [ "$returnVal" -ne "0" ]; then
+            echo "No matches found anywhere. Run a git fetch to find all new branches"
+        fi
     fi
 }
 
