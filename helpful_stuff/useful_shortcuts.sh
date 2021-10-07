@@ -38,6 +38,7 @@ alias gbig='ts 2;echo git bisect good;git bisect good'
 alias gbib='ts 2;echo git bisect bad;git bisect bad'
 alias gbir='ts 2;echo git bisect reset;git bisect reset'
 alias gsh='ts 2;echo git show;git show'
+alias grh='ts 5;echo git reset --hard origin/$(getCurrentBranch);git reset --hard origin/$(getCurrentBranch)'
 #
 # Submodules
 alias gsu='ts 2;echo git submodule update;git submodule update'
@@ -91,11 +92,32 @@ gstas() {
    ts 8;git stash apply stash@{$1}
 }
 
-checkBranches() { # 0 = local, 1 = remote check
+getCurrentBranch() {
+    myBranch=$(git branch | grep '*')
+    echo ${myBranch:2}
+}
+
+branchMatchingSimple() {
+    numMatches=$(git branch | grep -c $1)
+    if [ "$numMatches" -eq "0" ]; then
+        echo "NoMatches"
+    elif [ "$numMatches" -eq "1" ]; then
+        branch=$(git branch | grep $1)
+        echo "${branch:2}"
+    else
+        echo "MultipleMatches"
+    fi  
+}
+
+gbm() {
+    branchMatchingSimple $1
+}
+
+checkBranchesFull() { # 0 = local, 1 = remote check
     returnVal=1 # No matches
     flag=""
     prefix="LOCAL"
-    if [ "$2" -eq "1" ]; then; flag="-r"; prefix="REMOTE"; fi
+    if [ "$2" -eq "1" ]; then flag="-r"; prefix="REMOTE"; fi
 
     numMatches=$(git branch $flag | grep -c $1)
     if [ "$numMatches" -eq "0" ]; then
@@ -103,13 +125,13 @@ checkBranches() { # 0 = local, 1 = remote check
     elif [ "$numMatches" -eq "1" ]; then
         returnVal=0 # Success
         branch=$(git branch $flag | grep $1)
-        if [[ ${branch:0:1} == "*" ]]; then;  # Currently on branch
+        if [[ ${branch:0:1} == "*" ]]; then  # Currently on branch
             echo "Currently On [${branch:2}]"
             echo "If looking for other branches, try gcoir to check all remote branches"
         else
             branch="$(echo -e "${branch}" | tr -d '[:space:]')" # remove whitespace
 
-            if [ "$2" -eq "1" ]; then; branch=${branch:7}; fi # remove origin/
+            if [ "$2" -eq "1" ]; then branch=${branch:7}; fi # remove origin/
 
             echo "Checking out $branch"
             git checkout $branch
@@ -122,11 +144,11 @@ checkBranches() { # 0 = local, 1 = remote check
 }
 
 gcoil() {
-    ts 5; checkBranches $1 0
+    ts 5; checkBranchesFull $1 0
 }
 
 gcoir() {
-    ts 5; checkBranches $1 1
+    ts 5; checkBranchesFull $1 1
 }
 
 gcoi() {

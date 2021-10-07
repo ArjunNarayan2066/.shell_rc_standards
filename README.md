@@ -9,3 +9,8 @@ cd .shell_tools
 ./setup_linux.sh
 ./continue_setup.zsh # Needed b/c not sure how to get commands to continue through shell change
 ```
+
+Fancy matching syntax
+```
+git reset --hard origin/$(gbm some_root_string)
+```
