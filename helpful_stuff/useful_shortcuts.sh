@@ -109,7 +109,7 @@ branchMatchingSimple() {
     fi  
 }
 
-gbm() {
+function gbm {
     branchMatchingSimple $1
 }
 
